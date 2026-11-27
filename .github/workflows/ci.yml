@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - name: gofmt
+        run: |
+          OUT=$(gofmt -l .)
+          if [ -n "$OUT" ]; then echo "perlu gofmt:"; echo "$OUT"; exit 1; fi
+      - name: go vet
+        run: go vet ./...
+      - name: build
+        run: go build ./...
+      - name: smoke test
+        run: |
+          go build -o /tmp/grokbot ./cmd/grokbot
+          /tmp/grokbot --no-browser --port 8799 &
+          sleep 2
+          TOKEN=$(cat .grokbot-token)
+          curl -sf "http://127.0.0.1:8799/api/health" | grep -q '"ok":true'
+          curl -sf "http://127.0.0.1:8799/api/state?token=$TOKEN" | grep -q '"equity_usd"'
