@@ -10,7 +10,7 @@ import (
 	"runtime"
 	"syscall"
 
-	"github.com/grokbot/android-kit/pkg/bot"
+	"github.com/SLREV/androiddeskbot/pkg/bot"
 )
 
 var version = "1.0.0"

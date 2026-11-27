@@ -10,7 +10,7 @@ package botlib
 import (
 	"sync"
 
-	"github.com/grokbot/android-kit/pkg/bot"
+	"github.com/SLREV/androiddeskbot/pkg/bot"
 )
 
 var (

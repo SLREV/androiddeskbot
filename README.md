@@ -5,6 +5,10 @@
 sama. Terinspirasi arsitektur *multi-agent consensus*: **nothing gets bought
 unless they agree.**
 
+> 📦 Binary tetap **murni stdlib** — dependensi `golang.org/x/mobile` di
+> `go.mod` hanyalah *tool build* (gomobile/gobind untuk membungkus APK),
+> tidak ikut taut ke dalam aplikasi.
+
 > ⚠️ **Disclaimer**: perangkat lunak ini untuk edukasi & eksperimen (mode
 > `paper` secara default). Trading token meme berisiko tinggi — gunakan burner
 > wallet, jangan pernah menaruh private key utama. Live mode butuh konfigurasi
@@ -106,10 +110,11 @@ Repo sudah menyertakan workflow **`build-apk.yml`**: setiap push ke `main`/
 
 ### Cara 1 — build lokal
 
-Prasyarat: Go ≥ 1.21, Android Studio (atau SDK+NDK), JDK 17.
+Prasyarat: Go ≥ 1.22 (toolchain Go 1.26 otomatis terunduh mengikuti `go.mod`),
+Android Studio (atau SDK+NDK), JDK 17.
 
 ```bash
-go install golang.org/x/mobile/cmd/gomobile@latest
+go install tool     # gomobile + gobind — versi terkunci di go.mod
 gomobile init
 
 ./scripts/build-android.sh

@@ -74,6 +74,7 @@ Buka tab **Actions** di repo → workflow **build-apk** berjalan otomatis
 | `remote origin already exists` | `git remote set-url origin URL-BARU` |
 | `rejected (non-fast-forward)` | Repo dibuat dengan README → `git pull --rebase origin main` lalu `git push` |
 | `403` / auth gagal | Pakai **token** sebagai password (lihat langkah 3) |
+| `gomobile: missing golang.org/x/mobile dependency` | Sudah teratasi di commit terbaru (go.mod memuat `tool` gomobile+gobind) — pastikan pakai kode terbaru; lokal: `go install tool` |
 | Salah ketik file ter-commit | `git rm --cached nama-file` lalu commit ulang |
 
 ## Catatan keamanan
